@@ -31,7 +31,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
                     bool functionsDumped = DumpFunctionTypes(contractName, contractModel);
 
                     // The templates directory.
-                    string directory = "Assets/com.alephvault.unity.evmgames.contracts/" +
+                    string directory = "Packages/com.alephvault.unity.evmgames.contracts/" +
                                        "Editor/Utils/Dumping/Templates";
 
                     // The Contract template.
