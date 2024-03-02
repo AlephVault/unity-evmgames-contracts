@@ -54,7 +54,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             }, blockParameter);
         }
 
-        public Task SafeBatchTransferFrom(string from, string to, BigInteger[] ids, BigInteger[] values, byte data)
+        public Task SafeBatchTransferFrom(string from, string to, BigInteger[] ids, BigInteger[] values, byte[] data)
         {
             return Send(new SafeBatchTransferFromMessage
             {
@@ -66,7 +66,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task SafeTransferFrom(string from, string to, BigInteger id, BigInteger value, byte data)
+        public Task SafeTransferFrom(string from, string to, BigInteger id, BigInteger value, byte[] data)
         {
             return Send(new SafeTransferFromMessage
             {

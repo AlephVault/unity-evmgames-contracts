@@ -24,7 +24,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
                 public BigInteger Value { get; set; }
                 
                 [Parameter("bytes", "data", 5)]
-                public byte Data { get; set; }
+                public byte[] Data { get; set; }
             }
         }
     }
