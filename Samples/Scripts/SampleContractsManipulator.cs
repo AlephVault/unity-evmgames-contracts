@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Threading.Tasks;
 using AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts;
 using AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts.TokensContractComponents.Events;
 using AlephVault.Unity.EVMGames.Contracts.Types;
+using AlephVault.Unity.EVMGames.Contracts.Utils;
 using Nethereum.ABI;
 using Nethereum.Contracts;
+using Nethereum.Hex.HexConvertors.Extensions;
+using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Util;
@@ -31,12 +35,23 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples
         private BridgeContract bridge;
         private TokensContract tokens;
 
+        private class CustomEIP1559TransactionGasSetter : EIP1559TransactionGasSetter
+        {
+            protected override async Task<bool> Launch()
+            {
+                // There's no particular interaction here. We finish immediately.
+                Gas = 500000;
+                MaxPriorityFeePerGas = 400000000;
+                return true;
+            }
+        }
+
         private void Awake()
         {
             // Address will be: http://localhost:8545.
             web3Game = new Web3(new Account(new EthECKey(GAME_PRIVKEY)));
             web3User = new Web3(new Account(new EthECKey(USER_PRIVKEY)));
-            transactionGasSetterBoth = null;
+            transactionGasSetterBoth = new CustomEIP1559TransactionGasSetter();
         }
 
         // Start is called before the first frame update
@@ -56,6 +71,11 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples
             {
                 Debug.Log($"Event: from={@event.Event.From} to={@event.Event.To} id={@event.Event.Id} value={@event.Event.Value}");
             }
+
+            byte[] key = Shortcuts.Keccak256($"{DateTime.Now}Blablabla");
+            Debug.Log($"Look for this key: {key.ToHex()}");
+            TransactionReceipt tx = await tokens.SafeTransferFrom(USER_ADDRESS, GAME_ADDRESS, 1, 0x10000, key);
+            Debug.Log("Status: " + tx.Status);
         }
     }
 }

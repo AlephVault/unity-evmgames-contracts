@@ -95,7 +95,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             }, blockParameter);
         }
 
-        public Task RenounceOwnership()
+        public Task<TransactionReceipt> RenounceOwnership()
         {
             return Send(new RenounceOwnershipMessage
             {
@@ -109,7 +109,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             }, blockParameter);
         }
 
-        public Task TransferOwnership(string newOwner)
+        public Task<TransactionReceipt> TransferOwnership(string newOwner)
         {
             return Send(new TransferOwnershipMessage
             {
@@ -117,7 +117,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task SendUnits(string to, BigInteger id, BigInteger units)
+        public Task<TransactionReceipt> SendUnits(string to, BigInteger id, BigInteger units)
         {
             return Send(new SendUnitsMessage
             {
@@ -127,7 +127,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task SendTokens(string to, BigInteger id, BigInteger value, byte data)
+        public Task<TransactionReceipt> SendTokens(string to, BigInteger id, BigInteger value, byte data)
         {
             return Send(new SendTokensMessage
             {
@@ -138,7 +138,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task DefineBridgedResourceType(BigInteger id, BigInteger amountPerUnit)
+        public Task<TransactionReceipt> DefineBridgedResourceType(BigInteger id, BigInteger amountPerUnit)
         {
             return Send(new DefineBridgedResourceTypeMessage
             {
@@ -147,7 +147,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task RemoveBridgedResourceType(BigInteger id)
+        public Task<TransactionReceipt> RemoveBridgedResourceType(BigInteger id)
         {
             return Send(new RemoveBridgedResourceTypeMessage
             {
@@ -155,14 +155,14 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task Terminate()
+        public Task<TransactionReceipt> Terminate()
         {
             return Send(new TerminateMessage
             {
             });
         }
 
-        public Task OnERC1155Received(string arg0, string from, BigInteger id, BigInteger value, byte data)
+        public Task<TransactionReceipt> OnERC1155Received(string arg0, string from, BigInteger id, BigInteger value, byte data)
         {
             return Send(new OnERC1155ReceivedMessage
             {
@@ -174,7 +174,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task OnERC1155BatchReceived(string arg0, string arg1, BigInteger[] arg2, BigInteger[] arg3, byte arg4)
+        public Task<TransactionReceipt> OnERC1155BatchReceived(string arg0, string arg1, BigInteger[] arg2, BigInteger[] arg3, byte arg4)
         {
             return Send(new OnERC1155BatchReceivedMessage
             {

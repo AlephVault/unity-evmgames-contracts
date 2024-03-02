@@ -54,7 +54,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             }, blockParameter);
         }
 
-        public Task SafeBatchTransferFrom(string from, string to, BigInteger[] ids, BigInteger[] values, byte[] data)
+        public Task<TransactionReceipt> SafeBatchTransferFrom(string from, string to, BigInteger[] ids, BigInteger[] values, byte[] data)
         {
             return Send(new SafeBatchTransferFromMessage
             {
@@ -66,7 +66,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task SafeTransferFrom(string from, string to, BigInteger id, BigInteger value, byte[] data)
+        public Task<TransactionReceipt> SafeTransferFrom(string from, string to, BigInteger id, BigInteger value, byte[] data)
         {
             return Send(new SafeTransferFromMessage
             {
@@ -78,7 +78,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task SetApprovalForAll(string _operator, bool approved)
+        public Task<TransactionReceipt> SetApprovalForAll(string _operator, bool approved)
         {
             return Send(new SetApprovalForAllMessage
             {
@@ -103,7 +103,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             }, blockParameter);
         }
 
-        public Task Mint(string to, BigInteger id)
+        public Task<TransactionReceipt> Mint(string to, BigInteger id)
         {
             return Send(new MintMessage
             {
