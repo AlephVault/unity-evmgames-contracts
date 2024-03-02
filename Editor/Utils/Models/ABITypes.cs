@@ -132,7 +132,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
                     { "bytes30", "byte[]" },
                     { "bytes31", "byte[]" },
                     { "bytes32", "byte[]" },
-                    { "bytes", "byte" },
+                    { "bytes", "byte[]" },
                     { "string", "string" },
                     { "bool", "bool" },
                     { "address", "string" },
