@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
 using AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts;
+using AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts.BridgeContractComponents.Functions;
 using AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts.TokensContractComponents.Events;
 using AlephVault.Unity.EVMGames.Contracts.Types;
 using AlephVault.Unity.EVMGames.Contracts.Utils;
@@ -62,6 +63,8 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples
 
             BigInteger balance = await tokens.BalanceOf(web3Game.TransactionManager.Account.Address, new BigInteger(1));
             Debug.Log($"Balance of user in tokens: {balance}");
+            BridgedResourceTypesOutput definedType = await bridge.BridgedResourceTypes(1);
+            Debug.Log("Defined type");
             
             var worker = tokens.MakeTransferSingleEventsWorker((@event, parameter) =>
             {
@@ -73,9 +76,15 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples
             }
 
             byte[] key = Shortcuts.Keccak256($"{DateTime.Now}Blablabla");
-            Debug.Log($"Look for this key: {key.ToHex()}");
-            TransactionReceipt tx = await tokens.SafeTransferFrom(USER_ADDRESS, GAME_ADDRESS, 1, 0x10000, key);
+            byte[] encodedKey = Shortcuts.Encode(false, false,
+                new ABIValue("bytes32", key)
+            );
+            Debug.Log($"Look for this key: 0x{key.ToHex()}");
+            Debug.Log($"Look for this encoded key: 0x{key.ToHex()}");
+            TransactionReceipt tx = await tokens.SafeTransferFrom(USER_ADDRESS, bridge.Contract.ContractAddress, 1, 0x10000, encodedKey);
             Debug.Log("Status: " + tx.Status);
+            ParcelsOutput parcel = await bridge.Parcels(key);
+            Debug.Log($"Parcel: created={parcel.Created} id={parcel.Id} units={parcel.Units}");
         }
     }
 }
