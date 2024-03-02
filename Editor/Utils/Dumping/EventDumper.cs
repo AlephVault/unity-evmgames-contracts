@@ -65,7 +65,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
                                 .IntoDirectory(contractName + "ContractComponents")
                                     .IntoDirectory("Events")
                                         .Do(Boilerplate.InstantiateScriptCodeTemplate(
-                                            abiEventTemplate, eventModel.ClassName + "Event",
+                                            abiEventTemplate, eventModel.ClassName + "EventDTO",
                                             replacements
                                         ))
                                     .End()
@@ -83,7 +83,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 public static string MakeEventWorkerMethod(ABIEventModel eventModel)
                 {
                     List<string> lines = new List<string>();
-                    lines.Add($"{indentation2}public EventsWorker<{eventModel.ClassName}Event> Make{eventModel.Name}EventsWorker(Func<Event<{eventModel.ClassName}Event>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)");
+                    lines.Add($"{indentation2}public EventsWorker<{eventModel.ClassName}EventDTO> Make{eventModel.Name}EventsWorker(Func<Event<{eventModel.ClassName}EventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)");
                     lines.Add($"{indentation2}{{");
                     lines.Add($"{indentation2}    return MakeEventsWorker(filterMaker, fromBlock);");
                     lines.Add($"{indentation2}}}");

@@ -30,7 +30,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
                     string contractName, ABIFunctionModel functionModel
                 )
                 {
-                    // "{FunctionName}Message"
+                    // "{FunctionName}Function"
                     string inputType = functionModel.GetInputType();
                     // Something like "long", "BigInteger", "string", "byte[]",
                     // or "{FunctionMessage}Output". It may be "void", but that
