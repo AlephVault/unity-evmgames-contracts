@@ -1,0 +1,20 @@
+{
+    "name": "AlephVault.Unity.EVMGames.Contracts.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f90bbbab12f82970aadf435cc687514a",
+        "GUID:0c7703a0282a77d4ea0e67ece4526024",
+        "GUID:9fb1e86edc1bf4f46bfc867526bca155"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

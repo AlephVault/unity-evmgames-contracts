@@ -1,0 +1,17 @@
+using System.Numerics;
+using Nethereum.ABI.FunctionEncoding.Attributes;
+
+namespace Contracts
+{
+    namespace #CONTRACT_NAME#ContractComponents
+    {
+        namespace Events
+        {
+            [Event("#EVENT_ABI_NAME#")]
+            public class #SCRIPTNAME# : IEventDTO
+            {
+#CONTENT#
+            }
+        }
+    }
+}

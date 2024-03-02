@@ -1,0 +1,18 @@
+{
+  "name": "com.alephvault.unity.evmgames.contracts",
+  "version": "0.0.1",
+  "displayName": "Aleph Vault - Unity - EVMGames.Contracts",
+  "description": "A base implementation and convenience utilities to work with EVM contracts and also generate them from an ABI.",
+  "unity": "2023.1",
+  "dependencies": {
+    "com.alephvault.unity.menuactions": "0.0.1",
+    "com.alephvault.unity.boilerplates": "0.0.1",
+    "com.alephvault.unity.evmgames": "0.0.2",
+    "com.unity.nuget.newtonsoft-json": "2.0.0"
+  },
+  "author": {
+    "name": "Aleph Vault",
+    "email": "info@alephvault.com",
+    "url": "http://www.alephvault.com"
+  }
+}

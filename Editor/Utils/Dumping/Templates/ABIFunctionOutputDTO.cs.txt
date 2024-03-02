@@ -1,0 +1,17 @@
+using System.Numerics;
+using Nethereum.ABI.FunctionEncoding.Attributes;
+
+namespace Contracts
+{
+    namespace #CONTRACT_NAME#ContractComponents
+    {
+        namespace Functions
+        {
+#EXTRA_TYPES#            [FunctionOutput]
+            public class #SCRIPTNAME# : IFunctionOutputDTO
+            {
+#CONTENT#
+            }
+        }
+    }
+}

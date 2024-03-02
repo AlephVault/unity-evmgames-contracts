@@ -1,0 +1,20 @@
+using System;
+using System.Numerics;
+using System.Threading.Tasks;
+using AlephVault.Unity.EVMGames.Contracts.Types;
+using Nethereum.Contracts;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Web3;
+
+namespace Contracts
+{
+#FUNCTIONS_NAMESPACE##EVENTS_NAMESPACE##LINE#    /// <summary>
+    ///   An interface to the #CONTRACT_NAME# contract.
+    /// </summary>
+    public class #SCRIPTNAME# : BaseContract
+    {
+        public #SCRIPTNAME#(Web3 web3, string address, ITransactionGasSetter transactionGasSetter = null) : base(web3, address, transactionGasSetter)
+        {
+        }#CONTENT#
+    }
+}

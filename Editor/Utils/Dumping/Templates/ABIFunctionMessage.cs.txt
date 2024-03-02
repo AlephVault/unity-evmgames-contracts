@@ -1,0 +1,18 @@
+using System.Numerics;
+using Nethereum.ABI.FunctionEncoding.Attributes;
+using Nethereum.Contracts;
+
+namespace Contracts
+{
+    namespace #CONTRACT_NAME#ContractComponents
+    {
+        namespace Functions
+        {
+#EXTRA_TYPES#            [Function("#FUNCTION_ABI_NAME#"#FUNCTION_RETURN#)]
+            public class #SCRIPTNAME# : FunctionMessage
+            {
+#CONTENT#
+            }
+        }
+    }
+}
