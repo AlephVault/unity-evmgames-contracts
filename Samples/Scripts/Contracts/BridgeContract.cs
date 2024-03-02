@@ -6,7 +6,6 @@ using Nethereum.Contracts;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Util;
 using Nethereum.Web3;
-using UnityEngine;
 
 namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
 {
@@ -32,45 +31,43 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
 
         public Task<BigInteger> ACTIVE(BlockParameter blockParameter = null)
         {
-            return Call<ACTIVEMessage, BigInteger>(new ACTIVEMessage
+            return Call<ACTIVEFunction, BigInteger>(new ACTIVEFunction
             {
             }, blockParameter);
         }
 
         public Task<BigInteger> CREATED(BlockParameter blockParameter = null)
         {
-            return Call<CREATEDMessage, BigInteger>(new CREATEDMessage
+            return Call<CREATEDFunction, BigInteger>(new CREATEDFunction
             {
             }, blockParameter);
         }
 
         public Task<byte[]> IERC1155OK(BlockParameter blockParameter = null)
         {
-            return Call<IERC1155OKMessage, byte[]>(new IERC1155OKMessage
+            return Call<IERC1155OKFunction, byte[]>(new IERC1155OKFunction
             {
             }, blockParameter);
         }
 
         public Task<byte[]> PARCELNONE(BlockParameter blockParameter = null)
         {
-            return Call<PARCELNONEMessage, byte[]>(new PARCELNONEMessage
+            return Call<PARCELNONEFunction, byte[]>(new PARCELNONEFunction
             {
             }, blockParameter);
         }
 
         public Task<BridgedResourceTypesOutput> BridgedResourceTypes(BigInteger arg0, BlockParameter blockParameter = null)
         {
-            return Call<BridgedResourceTypesMessage, BridgedResourceTypesOutput>(new BridgedResourceTypesMessage
+            return CallMulti<BridgedResourceTypesFunction, BridgedResourceTypesOutput>(new BridgedResourceTypesFunction
             {
                 Arg0 = arg0,
             }, blockParameter);
         }
 
-        // This method was modified.
         public async Task<TokensContract> Economy(Web3 web3, ITransactionGasSetter transactionGasSetter, BlockParameter blockParameter = null)
         {
-            string address = await Call<EconomyMessage, string>(new EconomyMessage{}, blockParameter);
-            Debug.Log($"Economy address: {address}.");
+            string address = await Call<EconomyFunction, string>(new EconomyFunction{}, blockParameter);
             return new TokensContract(web3, address, transactionGasSetter);
         }
         
@@ -82,14 +79,14 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
 
         public Task<string> Owner(BlockParameter blockParameter = null)
         {
-            return Call<OwnerMessage, string>(new OwnerMessage
+            return Call<OwnerFunction, string>(new OwnerFunction
             {
             }, blockParameter);
         }
 
         public Task<ParcelsOutput> Parcels(byte[] arg0, BlockParameter blockParameter = null)
         {
-            return Call<ParcelsMessage, ParcelsOutput>(new ParcelsMessage
+            return CallMulti<ParcelsFunction, ParcelsOutput>(new ParcelsFunction
             {
                 Arg0 = arg0,
             }, blockParameter);
@@ -97,21 +94,21 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
 
         public Task<TransactionReceipt> RenounceOwnership()
         {
-            return Send(new RenounceOwnershipMessage
+            return Send(new RenounceOwnershipFunction
             {
             });
         }
 
         public Task<bool> Terminated(BlockParameter blockParameter = null)
         {
-            return Call<TerminatedMessage, bool>(new TerminatedMessage
+            return Call<TerminatedFunction, bool>(new TerminatedFunction
             {
             }, blockParameter);
         }
 
         public Task<TransactionReceipt> TransferOwnership(string newOwner)
         {
-            return Send(new TransferOwnershipMessage
+            return Send(new TransferOwnershipFunction
             {
                 NewOwner = newOwner,
             });
@@ -119,7 +116,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
 
         public Task<TransactionReceipt> SendUnits(string to, BigInteger id, BigInteger units)
         {
-            return Send(new SendUnitsMessage
+            return Send(new SendUnitsFunction
             {
                 To = to,
                 Id = id,
@@ -127,9 +124,9 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task<TransactionReceipt> SendTokens(string to, BigInteger id, BigInteger value, byte data)
+        public Task<TransactionReceipt> SendTokens(string to, BigInteger id, BigInteger value, byte[] data)
         {
-            return Send(new SendTokensMessage
+            return Send(new SendTokensFunction
             {
                 To = to,
                 Id = id,
@@ -140,7 +137,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
 
         public Task<TransactionReceipt> DefineBridgedResourceType(BigInteger id, BigInteger amountPerUnit)
         {
-            return Send(new DefineBridgedResourceTypeMessage
+            return Send(new DefineBridgedResourceTypeFunction
             {
                 Id = id,
                 AmountPerUnit = amountPerUnit,
@@ -149,7 +146,7 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
 
         public Task<TransactionReceipt> RemoveBridgedResourceType(BigInteger id)
         {
-            return Send(new RemoveBridgedResourceTypeMessage
+            return Send(new RemoveBridgedResourceTypeFunction
             {
                 Id = id,
             });
@@ -157,14 +154,14 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
 
         public Task<TransactionReceipt> Terminate()
         {
-            return Send(new TerminateMessage
+            return Send(new TerminateFunction
             {
             });
         }
 
-        public Task<TransactionReceipt> OnERC1155Received(string arg0, string from, BigInteger id, BigInteger value, byte data)
+        public Task<TransactionReceipt> OnERC1155Received(string arg0, string from, BigInteger id, BigInteger value, byte[] data)
         {
-            return Send(new OnERC1155ReceivedMessage
+            return Send(new OnERC1155ReceivedFunction
             {
                 Arg0 = arg0,
                 From = from,
@@ -174,9 +171,9 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public Task<TransactionReceipt> OnERC1155BatchReceived(string arg0, string arg1, BigInteger[] arg2, BigInteger[] arg3, byte arg4)
+        public Task<TransactionReceipt> OnERC1155BatchReceived(string arg0, string arg1, BigInteger[] arg2, BigInteger[] arg3, byte[] arg4)
         {
-            return Send(new OnERC1155BatchReceivedMessage
+            return Send(new OnERC1155BatchReceivedFunction
             {
                 Arg0 = arg0,
                 Arg1 = arg1,
@@ -188,23 +185,23 @@ namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
 
         public Task<bool> SupportsInterface(byte[] interfaceId, BlockParameter blockParameter = null)
         {
-            return Call<SupportsInterfaceMessage, bool>(new SupportsInterfaceMessage
+            return Call<SupportsInterfaceFunction, bool>(new SupportsInterfaceFunction
             {
                 InterfaceId = interfaceId,
             }, blockParameter);
         }
 
-        public EventsWorker<BridgedResourceTypeDefinedEvent> MakeBridgedResourceTypeDefinedEventsWorker(Func<Event<BridgedResourceTypeDefinedEvent>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<BridgedResourceTypeDefinedEventDTO> MakeBridgedResourceTypeDefinedEventsWorker(Func<Event<BridgedResourceTypeDefinedEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<BridgedResourceTypeRemovedEvent> MakeBridgedResourceTypeRemovedEventsWorker(Func<Event<BridgedResourceTypeRemovedEvent>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<BridgedResourceTypeRemovedEventDTO> MakeBridgedResourceTypeRemovedEventsWorker(Func<Event<BridgedResourceTypeRemovedEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<OwnershipTransferredEvent> MakeOwnershipTransferredEventsWorker(Func<Event<OwnershipTransferredEvent>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<OwnershipTransferredEventDTO> MakeOwnershipTransferredEventsWorker(Func<Event<OwnershipTransferredEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
