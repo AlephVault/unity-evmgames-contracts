@@ -197,7 +197,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
                     string parameters = GetParameters(functionModel);
                     if (paid) parameters = parameters != "" ? $"{parameters}, BigInteger amountToSend" : "BigInteger amountToSend";
                     List<string> lines = new List<string>();
-                    lines.Add($"{indentation2}public Task {functionModel.MethodName}({parameters})");
+                    lines.Add($"{indentation2}public Task<TransactionReceipt> {functionModel.MethodName}({parameters})");
                     lines.Add($"{indentation2}{{");
                     lines.Add($"{indentation2}    return Send(new {functionModel.GetInputType()}");
                     lines.Add($"{indentation2}    {{");
