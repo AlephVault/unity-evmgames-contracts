@@ -406,7 +406,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 /// <returns>The name of the input type</returns>
                 public string GetInputType()
                 {
-                    return ClassName + "Message";
+                    return ClassName + "Function";
                 }
             }
         }
