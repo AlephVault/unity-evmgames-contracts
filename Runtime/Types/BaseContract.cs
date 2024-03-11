@@ -8,12 +8,13 @@ using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Util;
 using Nethereum.Web3;
-using AlephVault.Unity.EVMGames.Contracts.Utils;
 
 namespace AlephVault.Unity.EVMGames.Contracts
 {
     namespace Types
     {
+        using Utils;
+
         /// <summary>
         ///   This base contract can set parameters to make a call.
         /// </summary>
