@@ -2,7 +2,7 @@
     "name": "AlephVault.Unity.EVMGames.Contracts.Runtime",
     "rootNamespace": "",
     "references": [
-        "GUID:f3e508bb81e3448249582d03b9396c93"
+        "GUID:4613bbec41bc0436cb367bae3bff0744"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
