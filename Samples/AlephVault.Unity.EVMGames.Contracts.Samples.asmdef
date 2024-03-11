@@ -2,7 +2,8 @@
     "name": "AlephVault.Unity.EVMGames.Contracts.Samples",
     "rootNamespace": "",
     "references": [
-        "GUID:5cade480e652de3849f7ab987ecf097c"
+        "GUID:5cade480e652de3849f7ab987ecf097c",
+        "GUID:4613bbec41bc0436cb367bae3bff0744"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
