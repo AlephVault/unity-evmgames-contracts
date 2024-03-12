@@ -119,7 +119,7 @@ WARNING: THIS MIGHT OVERRIDE EXISTING CODE. Always use proper source code manage
                     }
                 }
                 
-                [MenuItem("Assets/Create/AlephVault/EVM Games/Boilerplates/Contract from ABI", false, 210)]
+                [MenuItem("Assets/Create/Aleph Vault/EVM Games/Boilerplates/Contract from ABI", false, 210)]
                 public static void ExecuteBoilerplate()
                 {
                     CreateContractFromABIWindow window = ScriptableObject.CreateInstance<CreateContractFromABIWindow>();
