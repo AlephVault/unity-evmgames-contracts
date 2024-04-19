@@ -6,7 +6,7 @@ using Nethereum.Contracts;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
 
-namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
+namespace AlephVault.Unity.EVMGames.Contracts.Samples.Contracts
 {
     using TokensContractComponents.Functions;
     using TokensContractComponents.Events;

@@ -1,8 +1,8 @@
 using System;
 using System.Numerics;
 using System.Threading.Tasks;
-using AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts;
-using AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts.BridgeContractComponents.Functions;
+using AlephVault.Unity.EVMGames.Contracts.Samples.Contracts;
+using AlephVault.Unity.EVMGames.Contracts.Samples.Contracts.BridgeContractComponents.Functions;
 using AlephVault.Unity.EVMGames.Contracts.Types;
 using AlephVault.Unity.EVMGames.Contracts.Utils;
 using Nethereum.ABI;
@@ -13,7 +13,7 @@ using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using UnityEngine;
 
-namespace AlephhVault.Unity.EVMGames.Contracts.Samples
+namespace AlephVault.Unity.EVMGames.Contracts.Samples
 {
     public class SampleContractsManipulator : MonoBehaviour
     {

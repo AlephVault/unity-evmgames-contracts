@@ -7,7 +7,7 @@ using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Util;
 using Nethereum.Web3;
 
-namespace AlephhVault.Unity.EVMGames.Contracts.Samples.Contracts
+namespace AlephVault.Unity.EVMGames.Contracts.Samples.Contracts
 {
     using BridgeContractComponents.Functions;
     using BridgeContractComponents.Events;
