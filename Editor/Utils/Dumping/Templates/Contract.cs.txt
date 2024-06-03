@@ -2,6 +2,7 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using AlephVault.Unity.EVMGames.Contracts.Types;
+using AlephVault.Unity.EVMGames.Contracts.Types.Events;
 using Nethereum.Contracts;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;

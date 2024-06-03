@@ -130,17 +130,15 @@ namespace AlephVault.Unity.EVMGames.Contracts
             ///   This event has no extra topics.
             /// </summary>
             /// <typeparam name="EventType">The event type</typeparam>
+            /// <param name="filterMaker">The filter maker</param>
             /// <param name="fromBlock">The starting block</param>
             /// <returns>The event worker</returns>
-            public EventsWorker<EventType> MakeEventsWorker<EventType>(
-                Func<Event<EventType>, BlockParameter, NewFilterInput> filterMaker,
+            public Events.EventsWorker<EventType> MakeEventsWorker<EventType>(
+                Func<Event<EventType>, BlockParameter, BlockParameter, NewFilterInput> filterMaker,
                 BlockParameter fromBlock = null
             ) where EventType : IEventDTO, new()
             {
-                return new EventsWorker<EventType>(
-                    Web3.Eth.GetEvent<EventType>(),
-                    filterMaker, fromBlock
-                );
+                return new Events.EventsWorker<EventType>(Web3.Eth.GetEvent<EventType>(), filterMaker, fromBlock);
             }
         }
     }

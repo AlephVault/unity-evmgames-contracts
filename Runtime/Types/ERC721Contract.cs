@@ -10,6 +10,8 @@ namespace AlephVault.Unity.EVMGames.Contracts
 {
     namespace Types
     {
+        using Events;
+        
         /// <summary>
         ///   An interface to the ERC721 contract.
         /// </summary>
@@ -131,17 +133,17 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 });
             }
 
-            public EventsWorker<ApprovalEventDTO> MakeApprovalEventsWorker(Func<Event<ApprovalEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<ApprovalEventDTO> MakeApprovalEventsWorker(Func<Event<ApprovalEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
 
-            public EventsWorker<ApprovalForAllEventDTO> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<ApprovalForAllEventDTO> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
 
-            public EventsWorker<TransferEventDTO> MakeTransferEventsWorker(Func<Event<TransferEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<TransferEventDTO> MakeTransferEventsWorker(Func<Event<TransferEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }

@@ -2,6 +2,7 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using AlephVault.Unity.EVMGames.Contracts.Types;
+using AlephVault.Unity.EVMGames.Contracts.Types.Events;
 using Nethereum.Contracts;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
@@ -112,22 +113,22 @@ namespace AlephVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public EventsWorker<ApprovalForAllEvent> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEvent>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<ApprovalForAllEvent> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEvent>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<TransferBatchEvent> MakeTransferBatchEventsWorker(Func<Event<TransferBatchEvent>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<TransferBatchEvent> MakeTransferBatchEventsWorker(Func<Event<TransferBatchEvent>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<TransferSingleEvent> MakeTransferSingleEventsWorker(Func<Event<TransferSingleEvent>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<TransferSingleEvent> MakeTransferSingleEventsWorker(Func<Event<TransferSingleEvent>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
         
-        public EventsWorker<URIEvent> MakeURIEventsWorker(Func<Event<URIEvent>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<URIEvent> MakeURIEventsWorker(Func<Event<URIEvent>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }

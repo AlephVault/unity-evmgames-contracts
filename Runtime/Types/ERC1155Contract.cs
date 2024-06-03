@@ -11,6 +11,8 @@ namespace AlephVault.Unity.EVMGames.Contracts
 {
     namespace Types
     {
+        using Events;
+        
         /// <summary>
         ///   An interface to the ERC1155 contract.
         /// </summary>
@@ -96,22 +98,22 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 }, blockParameter);
             }
 
-            public EventsWorker<ApprovalForAllEventDTO> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<ApprovalForAllEventDTO> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
 
-            public EventsWorker<TransferBatchEventDTO> MakeTransferBatchEventsWorker(Func<Event<TransferBatchEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<TransferBatchEventDTO> MakeTransferBatchEventsWorker(Func<Event<TransferBatchEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
 
-            public EventsWorker<TransferSingleEventDTO> MakeTransferSingleEventsWorker(Func<Event<TransferSingleEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<TransferSingleEventDTO> MakeTransferSingleEventsWorker(Func<Event<TransferSingleEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
 
-            public EventsWorker<URIEventDTO> MakeURIEventsWorker(Func<Event<URIEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<URIEventDTO> MakeURIEventsWorker(Func<Event<URIEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }

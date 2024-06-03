@@ -2,6 +2,7 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using AlephVault.Unity.EVMGames.Contracts.Types;
+using AlephVault.Unity.EVMGames.Contracts.Types.Events;
 using Nethereum.Contracts;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Util;
@@ -191,17 +192,17 @@ namespace AlephVault.Unity.EVMGames.Contracts.Samples.Contracts
             }, blockParameter);
         }
 
-        public EventsWorker<BridgedResourceTypeDefinedEventDTO> MakeBridgedResourceTypeDefinedEventsWorker(Func<Event<BridgedResourceTypeDefinedEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<BridgedResourceTypeDefinedEventDTO> MakeBridgedResourceTypeDefinedEventsWorker(Func<Event<BridgedResourceTypeDefinedEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<BridgedResourceTypeRemovedEventDTO> MakeBridgedResourceTypeRemovedEventsWorker(Func<Event<BridgedResourceTypeRemovedEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<BridgedResourceTypeRemovedEventDTO> MakeBridgedResourceTypeRemovedEventsWorker(Func<Event<BridgedResourceTypeRemovedEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<OwnershipTransferredEventDTO> MakeOwnershipTransferredEventsWorker(Func<Event<OwnershipTransferredEventDTO>, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<OwnershipTransferredEventDTO> MakeOwnershipTransferredEventsWorker(Func<Event<OwnershipTransferredEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
