@@ -28,7 +28,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
         ///   Processes the incoming events of certain type.
         /// </summary>
         /// <typeparam name="EventLogType">The event type</typeparam>
-        public abstract class EventLogsProcessor<EventLogType> : EventLogsProcessor
+        public class EventLogsProcessor<EventLogType> : EventLogsProcessor
             where EventLogType : IEventDTO, new()
         {
             private EventsWorker<EventLogType> _worker;
