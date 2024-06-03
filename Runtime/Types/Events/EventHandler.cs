@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using Nethereum.Contracts;
+using Nethereum.RPC.Eth.DTOs;
 
 namespace AlephVault.Unity.EVMGames.Contracts
 {
@@ -11,9 +13,19 @@ namespace AlephVault.Unity.EVMGames.Contracts
         public abstract class EventHandler
         {
             /// <summary>
+            ///   Contains the associated filter log.
+            /// </summary>
+            public readonly FilterLog FilterLog;
+
+            /// <summary>
             ///   This method contains all the logic.
             /// </summary>
-            public abstract void Handle();
+            public abstract Task Handle();
+
+            public EventHandler(FilterLog filterLog)
+            {
+                FilterLog = filterLog;
+            }
         }
         
         /// <summary>
@@ -25,11 +37,11 @@ namespace AlephVault.Unity.EVMGames.Contracts
             /// <summary>
             ///   The related event log.
             /// </summary>
-            public readonly EventLog<T> Log;
+            public readonly T Event;
 
-            public EventHandler(EventLog<T> log)
+            public EventHandler(EventLog<T> log) : base(log.Log)
             {
-                Log = log;
+                Event = log.Event;
             }
         }
     }
