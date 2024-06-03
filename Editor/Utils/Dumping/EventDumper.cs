@@ -83,7 +83,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 public static string MakeEventWorkerMethod(ABIEventModel eventModel)
                 {
                     List<string> lines = new List<string>();
-                    lines.Add($"{indentation2}public EventsWorker<{eventModel.ClassName}EventDTO> Make{eventModel.Name}EventsWorker(Func<Event<{eventModel.ClassName}EventDTO>, BlockParameter, BlickParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)");
+                    lines.Add($"{indentation2}public EventsWorker<{eventModel.ClassName}EventDTO> Make{eventModel.Name}EventsWorker(Func<Event<{eventModel.ClassName}EventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)");
                     lines.Add($"{indentation2}{{");
                     lines.Add($"{indentation2}    return MakeEventsWorker(filterMaker, fromBlock);");
                     lines.Add($"{indentation2}}}");
