@@ -98,26 +98,25 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 }, blockParameter);
             }
 
-            public EventsWorker<ApprovalForAllEventDTO> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<ApprovalForAllEventDTO> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
 
-            public EventsWorker<TransferBatchEventDTO> MakeTransferBatchEventsWorker(Func<Event<TransferBatchEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<TransferBatchEventDTO> MakeTransferBatchEventsWorker(Func<Event<TransferBatchEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
 
-            public EventsWorker<TransferSingleEventDTO> MakeTransferSingleEventsWorker(Func<Event<TransferSingleEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<TransferSingleEventDTO> MakeTransferSingleEventsWorker(Func<Event<TransferSingleEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
 
-            public EventsWorker<URIEventDTO> MakeURIEventsWorker(Func<Event<URIEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<URIEventDTO> MakeURIEventsWorker(Func<Event<URIEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
         }
-        
     }
 }

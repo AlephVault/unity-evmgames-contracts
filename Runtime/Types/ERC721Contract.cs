@@ -133,19 +133,19 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 });
             }
 
-            public EventsWorker<ApprovalEventDTO> MakeApprovalEventsWorker(Func<Event<ApprovalEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<ApprovalEventDTO> MakeApprovalEventsWorker(Func<Event<ApprovalEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
-                return MakeEventsWorker(filterMaker, fromBlock);
+                return MakeEventsWorker<ApprovalEventDTO>(filterMaker, fromBlock);
             }
 
-            public EventsWorker<ApprovalForAllEventDTO> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<ApprovalForAllEventDTO> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
-                return MakeEventsWorker(filterMaker, fromBlock);
+                return MakeEventsWorker<ApprovalForAllEventDTO>(filterMaker, fromBlock);
             }
 
-            public EventsWorker<TransferEventDTO> MakeTransferEventsWorker(Func<Event<TransferEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<TransferEventDTO> MakeTransferEventsWorker(Func<Event<TransferEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
-                return MakeEventsWorker(filterMaker, fromBlock);
+                return MakeEventsWorker<TransferEventDTO>(filterMaker, fromBlock);
             }
         }
     }

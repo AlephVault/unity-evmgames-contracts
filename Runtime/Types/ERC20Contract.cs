@@ -5,6 +5,8 @@ using Nethereum.Contracts;
 using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
+using UnityEngine;
+using TransferFunction = Nethereum.Contracts.Standards.ERC20.ContractDefinition.TransferFunction;
 
 namespace AlephVault.Unity.EVMGames.Contracts
 {
@@ -94,14 +96,34 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 });
             }
 
-            public EventsWorker<ApprovalEventDTO> MakeApprovalEventsWorker(Func<Event<ApprovalEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<ApprovalEventDTO> MakeApprovalEventsWorker(Func<Event<ApprovalEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
             }
 
-            public EventsWorker<TransferEventDTO> MakeTransferEventsWorker(Func<Event<TransferEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+            public EventsWorker<TransferEventDTO> MakeTransferEventsWorker(Func<Event<TransferEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
             {
                 return MakeEventsWorker(filterMaker, fromBlock);
+            }
+
+            /// <summary>
+            ///   Returns an object which tracks the current value.
+            /// </summary>
+            /// <param name="account">The account to pivot</param>
+            /// <param name="initialAmount">The initial amount</param>
+            /// <param name="fromBlock">A starting block (optional)</param>
+            /// <returns></returns>
+            public ERC20EventsProcessorsSet MakeProcessorsSet(string account, BigInteger initialAmount = default, BlockParameter fromBlock = null)
+            {
+                if (initialAmount != 0 && (fromBlock == null || fromBlock.ParameterType == BlockParameter.BlockParameterType.earliest))
+                {
+                    Debug.LogWarning(
+                        "You're specifying a non-zero initial amount and the earliest block. " +
+                        "This does not make sense for ERC-20 contracts. Ensure you know what are you " +
+                        "doing, because this is non-standard."
+                    );
+                }
+                return new ERC20EventsProcessorsSet(this, account, initialAmount, fromBlock);
             }
         }
     }

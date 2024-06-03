@@ -60,9 +60,9 @@ namespace AlephVault.Unity.EVMGames.Contracts.Samples
             BridgedResourceTypesOutput definedType = await bridge.BridgedResourceTypes(1);
             Debug.Log("Defined type");
             
-            var worker = tokens.MakeTransferSingleEventsWorker((@event, fromBlock, toBlock) =>
+            var worker = tokens.MakeTransferSingleEventsWorker((@event) =>
             {
-                return @event.CreateFilterInput(null, null, new []{ USER_ADDRESS, GAME_ADDRESS }, fromBlock, toBlock);
+                return @event.CreateFilterInput(null, null, new []{ USER_ADDRESS, GAME_ADDRESS });
             });
             foreach (var @event in await worker.GetEvents())
             {

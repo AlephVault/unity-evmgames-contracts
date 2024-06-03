@@ -134,7 +134,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
             /// <param name="fromBlock">The starting block</param>
             /// <returns>The event worker</returns>
             public Events.EventsWorker<EventType> MakeEventsWorker<EventType>(
-                Func<Event<EventType>, BlockParameter, BlockParameter, NewFilterInput> filterMaker,
+                Func<Event<EventType>, NewFilterInput> filterMaker,
                 BlockParameter fromBlock = null
             ) where EventType : IEventDTO, new()
             {

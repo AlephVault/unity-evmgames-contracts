@@ -20,7 +20,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
             where EventType: IEventDTO, new()
         {
             // A filter maker for the events.
-            private Func<Event<EventType>, BlockParameter, BlockParameter, NewFilterInput> filterMaker;
+            private Func<Event<EventType>, NewFilterInput> filterMaker;
             
             /// <summary>
             ///   The target event.
@@ -40,7 +40,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
             /// <param name="fromBlock">The starting block</param>
             public EventsWorker(
                 Event<EventType> targetEvent,
-                Func<Event<EventType>, BlockParameter, BlockParameter, NewFilterInput> makeFilter = null,
+                Func<Event<EventType>, NewFilterInput> makeFilter = null,
                 BlockParameter fromBlock = null
             )
             {
@@ -57,25 +57,25 @@ namespace AlephVault.Unity.EVMGames.Contracts
             /// <param name="fromBlock">The starting block</param>
             public EventsWorker(
                 Event<EventType> targetEvent,
-                Func<Event<EventType>, BlockParameter, BlockParameter, NewFilterInput> makeFilter,
+                Func<Event<EventType>, NewFilterInput> makeFilter,
                 BigInteger fromBlock
             ) : this(targetEvent, makeFilter, new BlockParameter(new HexBigInteger(fromBlock))) {}
 
             // This is a default filter maker if one is not specified.
-            private static NewFilterInput DefaultFilterMaker(
-                Event<EventType> @event, BlockParameter fromBlock = null, BlockParameter toBlock = null
-            ) {
-                return @event.CreateFilterInput(fromBlock, toBlock);
+            private static NewFilterInput DefaultFilterMaker(Event<EventType> @event) {
+                return @event.CreateFilterInput();
             }
             
             /// <summary>
             ///   Gets the event, and updates the FromBlock in the process.
             /// </summary>
             /// <returns>The list of retrieved events</returns>
-            public async Task<List<EventLog<EventType>>> GetEvents(BlockParameter toBlock = null) {
-                List<EventLog<EventType>> events = await TargetEvent.GetAllChangesAsync(
-                    filterMaker(TargetEvent, FromBlock, toBlock)
-                );
+            public async Task<List<EventLog<EventType>>> GetEvents(BlockParameter toBlock = null)
+            {
+                NewFilterInput filterInput = filterMaker(TargetEvent);
+                filterInput.FromBlock = FromBlock;
+                filterInput.ToBlock = toBlock ?? BlockParameter.CreateLatest();
+                List<EventLog<EventType>> events = await TargetEvent.GetAllChangesAsync(filterInput);
 
                 foreach (EventLog<EventType> @event in events)
                 {

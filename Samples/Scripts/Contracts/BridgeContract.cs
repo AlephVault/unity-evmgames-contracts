@@ -192,17 +192,17 @@ namespace AlephVault.Unity.EVMGames.Contracts.Samples.Contracts
             }, blockParameter);
         }
 
-        public EventsWorker<BridgedResourceTypeDefinedEventDTO> MakeBridgedResourceTypeDefinedEventsWorker(Func<Event<BridgedResourceTypeDefinedEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<BridgedResourceTypeDefinedEventDTO> MakeBridgedResourceTypeDefinedEventsWorker(Func<Event<BridgedResourceTypeDefinedEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<BridgedResourceTypeRemovedEventDTO> MakeBridgedResourceTypeRemovedEventsWorker(Func<Event<BridgedResourceTypeRemovedEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<BridgedResourceTypeRemovedEventDTO> MakeBridgedResourceTypeRemovedEventsWorker(Func<Event<BridgedResourceTypeRemovedEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<OwnershipTransferredEventDTO> MakeOwnershipTransferredEventsWorker(Func<Event<OwnershipTransferredEventDTO>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<OwnershipTransferredEventDTO> MakeOwnershipTransferredEventsWorker(Func<Event<OwnershipTransferredEventDTO>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }

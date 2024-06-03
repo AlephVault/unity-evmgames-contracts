@@ -113,22 +113,22 @@ namespace AlephVault.Unity.EVMGames.Contracts.Samples.Contracts
             });
         }
 
-        public EventsWorker<ApprovalForAllEvent> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEvent>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<ApprovalForAllEvent> MakeApprovalForAllEventsWorker(Func<Event<ApprovalForAllEvent>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<TransferBatchEvent> MakeTransferBatchEventsWorker(Func<Event<TransferBatchEvent>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<TransferBatchEvent> MakeTransferBatchEventsWorker(Func<Event<TransferBatchEvent>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
 
-        public EventsWorker<TransferSingleEvent> MakeTransferSingleEventsWorker(Func<Event<TransferSingleEvent>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<TransferSingleEvent> MakeTransferSingleEventsWorker(Func<Event<TransferSingleEvent>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
         
-        public EventsWorker<URIEvent> MakeURIEventsWorker(Func<Event<URIEvent>, BlockParameter, BlockParameter, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
+        public EventsWorker<URIEvent> MakeURIEventsWorker(Func<Event<URIEvent>, NewFilterInput> filterMaker, BlockParameter fromBlock = null)
         {
             return MakeEventsWorker(filterMaker, fromBlock);
         }
