@@ -14,39 +14,61 @@ namespace AlephVault.Unity.EVMGames.Contracts
         /// <summary>
         ///   Processes the incoming events.
         /// </summary>
-        public abstract class EventsProcessor
+        public abstract class EventLogsProcessor
         {
             /// <summary>
             ///   Gets handlers related to events until some related block.
             /// </summary>
             /// <param name="toBlock">The target block</param>
             /// <returns>The list of handlers</returns>
-            public abstract Task<List<EventHandler>> GetHandlers(BlockParameter toBlock = null);
+            public abstract Task<List<EventLogHandler>> GetHandlers(BlockParameter toBlock = null);
         }
 
         /// <summary>
         ///   Processes the incoming events of certain type.
         /// </summary>
-        /// <typeparam name="EventType">The event type</typeparam>
-        /// <typeparam name="EventHandlerType">The handler type</typeparam>
-        public abstract class EventsProcessor<EventType, EventHandlerType> : EventsProcessor
-            where EventHandlerType : EventHandler<EventType>
-            where EventType : IEventDTO, new()
+        /// <typeparam name="EventLogType">The event type</typeparam>
+        public abstract class EventLogsProcessor<EventLogType> : EventLogsProcessor
+            where EventLogType : IEventDTO, new()
         {
-            private Func<EventLog<EventType>, EventHandlerType> _wrapper;
-            private EventsWorker<EventType> _worker;
+            private EventsWorker<EventLogType> _worker;
+            private Func<EventLog<EventLogType>, Task> _handler;
+
+            /// <summary>
+            ///   The event handler class for this processor.
+            ///   It executes a callback.
+            /// </summary>
+            private class LocalEventLogHandler : EventLogHandler<EventLogType>
+            {
+                private Func<EventLog<EventLogType>, Task> _handler;
+
+                public LocalEventLogHandler(
+                    Func<EventLog<EventLogType>, Task> handler,
+                    EventLog<EventLogType> log
+                ) : base(log) {
+                    _handler = handler;
+                }
+
+                public override Task Handle()
+                {
+                    return _handler(EventLog);
+                }
+            }
             
-            public EventsProcessor(
-                EventsWorker<EventType> worker,
-                Func<EventLog<EventType>, EventHandlerType> wrapper
-            ) {
-                _wrapper = wrapper ?? throw new ArgumentNullException(nameof(wrapper));
+            public EventLogsProcessor(
+                EventsWorker<EventLogType> worker, Func<EventLog<EventLogType>, Task> handler
+            )
+            {
+                _handler = handler ?? throw new ArgumentNullException(nameof(handler));
                 _worker = worker ?? throw new ArgumentNullException(nameof(worker));
             }
             
-            private List<EventHandler> GetHandlers(List<EventLog<EventType>> eventLogs)
+            private List<EventLogHandler> GetHandlers(List<EventLog<EventLogType>> eventLogs)
             {
-                return (from log in eventLogs select _wrapper(log) as EventHandler).ToList();
+                return (
+                    from log in eventLogs
+                    select new LocalEventLogHandler(_handler, log) as EventLogHandler
+                ).ToList();
             }
 
             /// <summary>
@@ -54,7 +76,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
             /// </summary>
             /// <param name="toBlock">The target block</param>
             /// <returns>The list of handlers</returns>
-            public override async Task<List<EventHandler>> GetHandlers(BlockParameter toBlock = null)
+            public override async Task<List<EventLogHandler>> GetHandlers(BlockParameter toBlock = null)
             {
                 return GetHandlers(await _worker.GetEvents(toBlock));
             }
@@ -66,7 +88,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
         public class EventsProcessors
         {
             // The instantiated processors.
-            private EventsProcessor[] _processors;
+            private EventLogsProcessor[] _processors;
             
             /// <summary>
             ///   Takes a list of processors and processes it properly.
@@ -77,7 +99,7 @@ namespace AlephVault.Unity.EVMGames.Contracts
             /// </summary>
             /// <param name="processors">The processors</param>
             /// <exception cref="ArgumentNullException">One or more of the processors were null</exception>
-            public EventsProcessors(params EventsProcessor[] processors)
+            public EventsProcessors(params EventLogsProcessor[] processors)
             {
                 for (int index = 0; index < processors.Length; index++)
                 {
@@ -86,9 +108,9 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 _processors = processors;
             }
 
-            private async Task<List<EventHandler>> GetMergedHandlers(BlockParameter toBlock = null)
+            private async Task<List<EventLogHandler>> GetMergedHandlers(BlockParameter toBlock = null)
             {
-                List<EventHandler> handlers = new List<EventHandler>();
+                List<EventLogHandler> handlers = new List<EventLogHandler>();
                 foreach (var processor in _processors)
                 {
                     handlers.AddRange(await processor.GetHandlers(toBlock));
@@ -96,27 +118,27 @@ namespace AlephVault.Unity.EVMGames.Contracts
                 
                 handlers.Sort((a, b) =>
                 {
-                    if (a.FilterLog.BlockNumber.Value > b.FilterLog.BlockNumber.Value)
+                    if (a.Log.BlockNumber.Value > b.Log.BlockNumber.Value)
                     {
                         return 1;
                     }
-                    if (a.FilterLog.BlockNumber.Value < b.FilterLog.BlockNumber.Value)
+                    if (a.Log.BlockNumber.Value < b.Log.BlockNumber.Value)
                     {
                         return -1;
                     }
-                    if (a.FilterLog.TransactionIndex.Value > b.FilterLog.TransactionIndex.Value)
+                    if (a.Log.TransactionIndex.Value > b.Log.TransactionIndex.Value)
                     {
                         return 1;
                     }
-                    if (a.FilterLog.TransactionIndex.Value < b.FilterLog.TransactionIndex.Value)
+                    if (a.Log.TransactionIndex.Value < b.Log.TransactionIndex.Value)
                     {
                         return -1;
                     }
-                    if (a.FilterLog.LogIndex.Value > b.FilterLog.LogIndex.Value)
+                    if (a.Log.LogIndex.Value > b.Log.LogIndex.Value)
                     {
                         return 1;
                     }
-                    if (a.FilterLog.LogIndex.Value < b.FilterLog.LogIndex.Value)
+                    if (a.Log.LogIndex.Value < b.Log.LogIndex.Value)
                     {
                         return -1;
                     }

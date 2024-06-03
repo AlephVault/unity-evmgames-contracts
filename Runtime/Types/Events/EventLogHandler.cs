@@ -10,38 +10,38 @@ namespace AlephVault.Unity.EVMGames.Contracts
         ///   An event handler creates an arbitrary logic
         ///   to handle an incoming event.
         /// </summary>
-        public abstract class EventHandler
+        public abstract class EventLogHandler
         {
             /// <summary>
-            ///   Contains the associated filter log.
+            ///   The underlying event log.
             /// </summary>
-            public readonly FilterLog FilterLog;
-
+            public abstract FilterLog Log { get; }
+            
             /// <summary>
             ///   This method contains all the logic.
             /// </summary>
             public abstract Task Handle();
-
-            public EventHandler(FilterLog filterLog)
-            {
-                FilterLog = filterLog;
-            }
         }
         
         /// <summary>
         ///   A type-specific event handler.
         /// </summary>
         /// <typeparam name="T">The event type</typeparam>
-        public abstract class EventHandler<T> : EventHandler
+        public abstract class EventLogHandler<T> : EventLogHandler
         {
             /// <summary>
             ///   The related event log.
             /// </summary>
-            public readonly T Event;
+            public readonly EventLog<T> EventLog;
 
-            public EventHandler(EventLog<T> log) : base(log.Log)
+            /// <summary>
+            ///   The underlying event log.
+            /// </summary>
+            public override FilterLog Log => EventLog.Log;
+
+            public EventLogHandler(EventLog<T> eventLog)
             {
-                Event = log.Event;
+                EventLog = eventLog;
             }
         }
     }
